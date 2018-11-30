@@ -1,4 +1,9 @@
+# Built source code
+dist/
+
+# Locked dependancies
 package-lock.json
+
 # Logs
 logs
 *.log
