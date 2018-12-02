@@ -17,7 +17,18 @@ app.use(helmet());
 app.use(cors());
 /* Server middlewares */
 
-app.post('/', controller.retrieveCourses);
+const validateBody = (req, res, next) => {
+  const { username, password } = req.body;
+  const errors = [];
+  if (!username) errors.push('username<String> is required');
+  if (!password) errors.push('password<String> is required');
+  if (errors.length > 0) {
+    return res.status(BAD_REQUEST).json({ errors });
+  }
+  return next();
+};
+
+app.post('/', validateBody, controller.retrieveCourses);
 
 // General error handler
 app.use((err, req, res, next) => {
