@@ -12,7 +12,7 @@
     "url": "git+https://github.com/AbdullahKady/guc-coursework-api.git"
   },
   "author": "Abdullah Elkady <abdullahkady@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AbdullahKady/guc-coursework-api/issues"
   },
