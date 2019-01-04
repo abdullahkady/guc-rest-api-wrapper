@@ -6,10 +6,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { PORT, GUC_COURSEWORK_API } = process.env;
+const { PORT, GUC_COURSEWORK_API, GUC_TRANSCRIPT_API } = process.env;
 
 const GUC_API_CONFIG = { clientVersion: '1.3', app_os: '0', os_version: '6.0.1' };
 
 export {
-  PORT, GUC_COURSEWORK_API, GUC_API_CONFIG,
+  PORT, GUC_COURSEWORK_API, GUC_API_CONFIG, GUC_TRANSCRIPT_API,
 };
