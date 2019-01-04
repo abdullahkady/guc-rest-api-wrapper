@@ -28,7 +28,7 @@ const validateBody = (req, res, next) => {
   return next();
 };
 
-app.post('/', validateBody, controller.retrieveCourses);
+app.post('/coursework', validateBody, controller.retrieveCourses);
 
 // General error handler
 app.use((err, req, res, next) => {

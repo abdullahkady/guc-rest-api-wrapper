@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { OK, UNAUTHORIZED } from 'http-status';
 import { GUC_COURSEWORK_API, GUC_TRANSCRIPT_API, GUC_API_CONFIG } from './config';
+import courseworkParser from './parser/coursework';
 
 // This is the response returned by the GUC API when invalid credentials are used ._.
 const isNotAuthroized = response => response.data.d === '[{"error":"Unauthorized"}]';
