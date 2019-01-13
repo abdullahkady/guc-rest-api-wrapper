@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { OK, UNAUTHORIZED } from 'http-status';
+import { OK, UNAUTHORIZED, FORBIDDEN } from 'http-status';
 import { GUC_COURSEWORK_API, GUC_TRANSCRIPT_API, GUC_API_CONFIG } from './config';
 import courseworkParser from './parser/coursework';
 import transcriptParser from './parser/transcript';
 
 // This is the response returned by the GUC API when invalid credentials are used ._.
 const isNotAuthroized = response => response.data.d === '[{"error":"Unauthorized"}]';
+
+const needsEvaluation = response => response.data.d
+  === '"[{"error":" You have not evaluated your courses. Please click <a href=\'http://student.guc.edu.eg/External/Student/Course/EvaluateCourse.aspx\'>here</a> to finish your evaluation."}]"';
 
 const getCourses = async (username, password) => {
   try {
@@ -38,6 +41,12 @@ const getTranscript = async (username, password) => {
     if (isNotAuthroized(transcriptResponse)) {
       const err = new Error('Invalid credentials');
       err.status = UNAUTHORIZED;
+      throw err;
+    }
+
+    if (needsEvaluation(transcriptResponse)) {
+      const err = new Error('Evaluate first');
+      err.status = FORBIDDEN;
       throw err;
     }
 
