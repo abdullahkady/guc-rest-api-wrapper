@@ -8,7 +8,7 @@ import transcriptParser from './parser/transcript';
 const isNotAuthroized = response => response.data.d === '[{"error":"Unauthorized"}]';
 
 const needsEvaluation = response => response.data.d
-  === '"[{"error":" You have not evaluated your courses. Please click <a href=\'http://student.guc.edu.eg/External/Student/Course/EvaluateCourse.aspx\'>here</a> to finish your evaluation."}]"';
+  === '[{"error":" You have not evaluated your courses. Please click <a href=\'http://student.guc.edu.eg/External/Student/Course/EvaluateCourse.aspx\'>here</a> to finish your evaluation."}]';
 
 const getCourses = async (username, password) => {
   try {
@@ -45,7 +45,7 @@ const getTranscript = async (username, password) => {
     }
 
     if (needsEvaluation(transcriptResponse)) {
-      const err = new Error('Evaluate first');
+      const err = new Error('Please evaluate courses&staff first');
       err.status = FORBIDDEN;
       throw err;
     }
